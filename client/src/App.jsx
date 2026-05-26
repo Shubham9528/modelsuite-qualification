@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import SubmissionsPage from './pages/admin/SubmissionsPage';
 import TalentDashboard from './pages/talent/TalentDashboard';
 
 
@@ -45,6 +46,14 @@ function App() {
             element={
               <PrivateRoute role="Talent">
                 <TalentDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin/submissions"
+            element={
+              <PrivateRoute role="Admin">
+                <SubmissionsPage />
               </PrivateRoute>
             }
           />
