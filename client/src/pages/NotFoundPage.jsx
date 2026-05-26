@@ -1,4 +1,4 @@
-// 404 — Page Not Found
+﻿// 404 — Page Not Found
 const NotFoundPage = () => (
   <div className="flex flex-col items-center justify-center min-h-screen bg-bg-dark text-text-primary">
     {/* Ambient glow */}
@@ -9,7 +9,7 @@ const NotFoundPage = () => (
       <p className="text-[120px] font-extrabold tracking-tight leading-none gradient-text">404</p>
       <h1 className="text-2xl font-bold text-text-primary mt-2 mb-3">Page Not Found</h1>
       <p className="text-sm text-text-muted">The page you&apos;re looking for doesn&apos;t exist or has been moved.</p>
-      {/* Intentional gap: no "Go Back" or "Go Home" button — user is stranded */}
+      
     </div>
   </div>
 );

@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-// Intentional gap: base URL hardcoded — should use env variable (VITE_API_URL)
+﻿import axios from 'axios';
 const API = axios.create({
   baseURL: 'http://localhost:5000/api',
 });

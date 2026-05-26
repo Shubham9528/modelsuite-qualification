@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
@@ -26,13 +26,11 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Intentional gap: no client-side validation before hitting the API
     try {
       const { data } = await API.post('/auth/login', { email, password });
       login(data);
       data.role === 'Admin' ? navigate('/admin/dashboard') : navigate('/talent/dashboard');
     } catch (err) {
-      // Intentional gap: alert() instead of toast
       alert(err.response?.data?.message || 'Login failed');
     }
   };
@@ -63,7 +61,7 @@ const LoginPage = () => {
             <label className={labelCls} htmlFor="password">Password</label>
             <input id="password" type="password" placeholder="••••••••"
               value={password} onChange={(e) => setPassword(e.target.value)} required className={inputCls} />
-            {/* Intentional gap: no "Forgot password?" link */}
+            
           </div>
 
           <button type="submit"

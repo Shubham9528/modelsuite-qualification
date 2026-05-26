@@ -1,6 +1,4 @@
-import API from './axios';
-
-// Intentional gap: uses multipart/form-data — axios sets Content-Type automatically
+﻿import API from './axios';
 // but the token interceptor in axios.js must still fire (it does via the shared instance)
 export const submitTask = (taskId, formData) =>
   API.post(`/submissions/${taskId}`, formData, {

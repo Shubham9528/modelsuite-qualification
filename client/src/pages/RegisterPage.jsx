@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
@@ -28,8 +28,6 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Intentional gap: no password confirmation field
-    // Intentional gap: no password strength validation
     try {
       const { data } = await API.post('/auth/register', { name, email, password, role });
       login(data);
@@ -69,12 +67,12 @@ const RegisterPage = () => {
             <label className={labelCls} htmlFor="reg-password">Password</label>
             <input id="reg-password" type="password" placeholder="••••••••"
               value={password} onChange={(e) => setPassword(e.target.value)} required className={inputCls} />
-            {/* Intentional gap: no confirm password field */}
+            
           </div>
 
           <div className="flex flex-col gap-2">
             <label className={labelCls} htmlFor="role">Role</label>
-            {/* Intentional gap: anyone can self-register as Admin */}
+            
             <select id="role" value={role} onChange={(e) => setRole(e.target.value)}
               className={`${inputCls} custom-select cursor-pointer`}>
               <option value="Talent">Talent</option>
