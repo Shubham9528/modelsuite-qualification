@@ -72,7 +72,7 @@ const LoginPage = () => {
 
       {/* ── Right: Visual panel ── */}
       <div className="hidden lg:flex items-center justify-center relative overflow-hidden p-16"
-        style={{ background: 'linear-gradient(140deg, #0d0c1a 0%, #13103a 50%, #0f1229 100%)' }}>
+        style={{ background: 'linear-gradient(140deg, #050505 0%, #111111 50%, #000000 100%)' }}>
         <div className="auth-orb-1" />
         <div className="auth-orb-2" />
         <div className="relative z-10 max-w-[440px]">
