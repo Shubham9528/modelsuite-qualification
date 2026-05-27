@@ -225,3 +225,9 @@ The app will open at `http://localhost:5173`
 
 **Upload files not saving**
 → The `server/uploads/` directory must be writable. It is tracked in git via `.gitkeep` — ensure it exists.
+
+---
+
+## Contribution
+
+- raise a PR for the particular issue assigned to you and then go to issue and link your PR there to get it reviewed
