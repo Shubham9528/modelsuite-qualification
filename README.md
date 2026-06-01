@@ -1,9 +1,4 @@
 # Task Pipeline
-
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)
-![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)
-![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)
-
 A full-stack task management system for talent onboarding workflows. Built with the MERN stack.
 
 ---
