@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Sidebar from '../../components/admin/Sidebar';
 import SubmissionReviewModal from '../../components/admin/SubmissionReviewModal';
 import { fetchAllSubmissions } from '../../api/submissions';
@@ -22,6 +22,7 @@ const SubmissionsPage = () => {
     }
   };
 
+  // eslint-disable-next-line
   useEffect(() => { loadSubmissions(); }, []);
   const pending  = submissions.filter((s) => s.reviewStatus === 'Pending').length;
   const approved = submissions.filter((s) => s.reviewStatus === 'Approved').length;

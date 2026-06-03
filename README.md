@@ -69,10 +69,12 @@ modelsuite-qualification/
 
 ##  Setup
 
-### 1. Clone the repository
+### 1. Fork and Clone the repository
+
+First, fork this repository to your own GitHub account by clicking the "Fork" button at the top right of the repository page. Then clone your fork:
 
 ```bash
-git clone https://github.com/modelsuite-ai/modelsuite-qualification.git
+git clone https://github.com/<your-username>/modelsuite-qualification.git
 cd modelsuite-qualification
 ```
 
@@ -243,6 +245,7 @@ The app will open at `http://localhost:5173`
 
 ---
 
+<<<<<<< HEAD
 ##  Contribution Guidelines
 
 **This repository is used for candidate assessment as part of our hiring process.**
@@ -263,6 +266,18 @@ To submit your work:
 - PR description must be complete with testing steps and screenshots (for UI changes)
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed instructions and requirements.
+=======
+## 🤝 Contribution and Qualification
+
+Welcome! If you are participating in a qualification assessment or contributing to this repository, you must follow our structured process for branching, local checks, and Pull Requests.
+
+Please read the full guidelines in **[CONTRIBUTING.md](./CONTRIBUTING.md)** before starting your work. This file covers:
+- Exact Branch Naming & PR Title rules
+- Pre-flight local checks (linting/building)
+- PR Template requirements
+- Our automated CI/CD Pipeline (which automatically closes failing PRs)
+- Final submission requirements (PR link & Voice recorded video)
+>>>>>>> 2640fc3b6f4df9e1541d5e918a243b96e58f6410
 
 ---
 

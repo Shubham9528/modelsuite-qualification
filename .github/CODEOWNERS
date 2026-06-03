@@ -1,0 +1,11 @@
+# CODEOWNERS
+# This file defines who should review pull requests for different parts of the repository.
+
+# Default owners for everything in the repo
+* @Pranav140 @vanshrastogi111
+
+# CI/CD and workflows
+/.github/workflows/ @Pranav140 @vanshrastogi111
+
+# Documentation
+*.md @Pranav140 @vanshrastogi111

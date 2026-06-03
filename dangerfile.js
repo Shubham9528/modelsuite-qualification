@@ -3,18 +3,15 @@ const pr = danger.github.pr;
 const modifiedFiles = danger.git.modified_files;
 const createdFiles = danger.git.created_files;
 const allChangedFiles = [...modifiedFiles, ...createdFiles];
-// Accept alphanumeric team IDs and optional numeric ticket suffix:
-// [9DWW]-title, [A2Y7]-title, or [TP-42]-title
-const taskIdPattern = /^\[[A-Z0-9]+(?:-\d+)?\]\s*-\s*.+/;
+// Accept branch names assigned to candidates (e.g., 27-26-22-7-5-pranav-test)
+const taskIdPattern = /^\d+(?:-\d+)+-[a-zA-Z0-9-]+$/;
 
 if (!taskIdPattern.test(pr.title)) {
   fail(
-    "**Invalid or missing Task ID in PR title.**\n\n" +
-      "PR title must follow one of these formats:\n" +
-      "- `[ALPHANUMERIC_ID]-your-title`\n" +
-      "- `[TEAM-123]-your-title`\n\n" +
-      "Valid: `[9DWW]-critical task enforcement`, `[A2Y7]-system health check`, `[TP-42]-add login page`\n" +
-      "Invalid: `9DWW-critical task enforcement`, `[9DWW] critical task enforcement`, `#42 update`"
+    "**Invalid PR title format.**\n\n" +
+      "PR title must match your assigned branch name exactly.\n" +
+      "Format: `XX-XX-XX-XX-XX-yourname`\n\n" +
+      "Valid example: `27-26-22-7-5-pranav`"
   );
 }
 

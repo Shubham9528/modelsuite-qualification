@@ -1,31 +1,48 @@
 ### Summary (max 3 sentences)
-Briefly describe what changed and why. Be precise — incomplete summaries may result in the PR being closed.
+<!-- Describe what was changed and why. Be precise. -->
+<!-- Incomplete summaries will result in the PR being closed. -->
+
+## Checklist
+
+> **Required before opening this PR:** Complete these checks locally to ensure the code is ready for review. PRs opened without these checks passing may be closed.
+
+- [ ] I ran `cd client && npm run lint && npm run build` and `cd server && npm run lint && npm run build` locally
+- [ ] All checks passed (lint, build)
+- [ ] No errors or warnings remain
+
+> **Note:** This is a *pre-PR* checklist completed before submission. Additional checklists below are completed after the PR is opened.
+
+### Short Demo Video (required)
+<!-- You must provide a link to a Voice recorded video of the overall changes before the deadline -->
+<!-- Feature/UI PR → FULL demo video (end-to-end) required -->
+<!-- No video = PR will not be merged (may be closed immediately) -->
+
+---
+- [ ] I have read and followed the **[Contribution and Qualification Guidelines](../CONTRIBUTING.md)**
+
+## Required Checklist
+
+### Task & Workflow
+- [ ] Create a new Branch exactly matching your assigned name (e.g. `27-26-22-7-5-pranav-test`)
+- [ ] PR title is exactly your assigned branch name
+- [ ] Latest target branch (`master`) was pulled immediately before opening this PR
+
+### Quality & Safety
+- [ ] Change tested locally
+- [ ] Full diff reviewed before submitting (no blind copy/paste)
+- [ ] No secrets, keys, or personal data included
+
 
 ---
 
-## Checklist (run locally before opening PR)
-- [ ] I ran relevant checks locally for changed areas (e.g. `cd client && npm run lint && npm run build`, `cd server && npm run lint && npm run build`).
-- [ ] No new lint errors or build failures
-- [ ] No TODO/FIXME or debug statements remain
+### Checklist Completion Rule
 
-## What I changed
-- A short list of files or areas touched (e.g. `client/src/components/TaskCard.jsx`, `server/controllers/taskController.js`).
+The checklist **must be completed after the Pull Request is opened**.
 
-## Short Demo / Screenshots
-- If this changes the UI, include a short demo GIF or before/after screenshots here or attach to the PR.
+Process:
+1. Create and submit the Pull Request  
+2. Reopen the Pull Request page  
+3. Complete **all** required checklist items  
+4. Ensure your PR link and Voice recorded video are submitted before the deadline
 
-## Checklist (required)
-- [ ] PR title includes task ID in square brackets (e.g. `[TP-42]-add-login-page`) when applicable
-- [ ] Branch created for this task (no direct pushes to master)
-- [ ] Only production-relevant files were changed
-- [ ] No secrets or credentials committed
-- [ ] All new dependencies are intentional and documented
-
-## Testing notes
-- How to run locally (commands) and any special setup required.
-
-## Additional notes
-- Anything the reviewer should pay attention to, known issues, or follow-ups.
-
----
-Fill in the sections above before requesting review. Incomplete templates slow reviews and may cause PR closure.
+Incomplete or incorrect checklists will result in the PR being closed.
