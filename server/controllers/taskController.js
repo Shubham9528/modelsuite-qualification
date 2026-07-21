@@ -1,17 +1,52 @@
 const Task = require('../models/Task');
 const Submission = require('../models/Submission');
 
-// @desc  Get all tasks
-// @route GET /api/tasks
+// @desc  Get all tasks (paginated)
+// @route GET /api/tasks?page=1&limit=10
 // @access Admin
 const getAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find({})
-      .populate('assignedTo', 'name email')
-      .populate('createdBy', 'name')
-      .sort({ createdAt: -1 });
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    // Cap at 100 to prevent abuse — no client should ever need more than 100 per page
+    const limit = Math.min(100, Math.max(1, parseInt(req.query.limit) || 10));
+    const skip = (page - 1) * limit;
+    const search = req.query.search || '';
+    const status = req.query.status || 'All';
 
-    res.json(tasks);
+    // Build dynamic filter for DB-level search and status filtering
+    const query = {};
+    if (status !== 'All') query.status = status;
+    if (search) query.title = { $regex: search, $options: 'i' };
+
+    const [tasks, total, openCount, submittedCount, approvedCount] =
+      await Promise.all([
+        Task.find(query)
+          .populate('assignedTo', 'name email')
+          .populate('createdBy', 'name')
+          .sort({ createdAt: -1 })
+          .skip(skip)
+          .limit(limit)
+          .lean(),
+        Task.countDocuments(query),
+        Task.countDocuments({ status: 'Open' }),
+        Task.countDocuments({ status: 'Submitted' }),
+        Task.countDocuments({ status: 'Approved' }),
+      ]);
+
+    res.json({
+      tasks,
+      stats: {
+        open: openCount,
+        submitted: submittedCount,
+        approved: approvedCount,
+      },
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

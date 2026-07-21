@@ -26,24 +26,35 @@ const AdminDashboard = () => {
   const [editTask, setEditTask]     = useState(null);
   const [search, setSearch]         = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
+  const [currentPage, setCurrentPage]   = useState(1);
+  const [pagination, setPagination]     = useState({ total: 0, totalPages: 1 });
+  const [taskStats, setTaskStats]       = useState({ open: 0, submitted: 0, approved: 0 });
+  const LIMIT = 10;
 
-  const loadTasks = async () => {
+  const loadTasks = async (page = currentPage) => {
     try {
-      const { data } = await fetchAllTasks();
-      setTasks(data);
+      const { data } = await fetchAllTasks(page, LIMIT, search, statusFilter);
+      setTasks(data.tasks);
+      setPagination(data.pagination);
+      setTaskStats(data.stats);
     } catch {
       alert('Failed to load tasks');
     }
   };
 
+  // Re-fetch when page changes
   // eslint-disable-next-line
-  useEffect(() => { loadTasks(); }, []);
+  useEffect(() => { loadTasks(currentPage); }, [currentPage]);
+
+  // Re-fetch from page 1 when search or status filter changes
+  // eslint-disable-next-line
+  useEffect(() => { setCurrentPage(1); loadTasks(1); }, [search, statusFilter]);
 
   const stats = {
-    total:     tasks.length,
-    open:      tasks.filter((t) => t.status === 'Open').length,
-    submitted: tasks.filter((t) => t.status === 'Submitted').length,
-    approved:  tasks.filter((t) => t.status === 'Approved').length,
+    total:     pagination.total,
+    open:      taskStats.open,
+    submitted: taskStats.submitted,
+    approved:  taskStats.approved,
   };
 
   const statCards = [
@@ -53,14 +64,6 @@ const AdminDashboard = () => {
     { label: 'Approved',    value: stats.approved,  colorClass: 'stat-card-green',   valueColor: '#34D399' },
   ];
 
-  /* Filter tasks */
-  const filteredTasks = tasks.filter((t) => {
-    const matchSearch = !search ||
-      t.title?.toLowerCase().includes(search.toLowerCase()) ||
-      t.assignedTo?.name?.toLowerCase().includes(search.toLowerCase());
-    const matchStatus = statusFilter === 'All' || t.status === statusFilter;
-    return matchSearch && matchStatus;
-  });
 
   return (
     <div className="flex min-h-screen" style={{ background: '#050505' }}>
@@ -120,7 +123,7 @@ const AdminDashboard = () => {
                   border: '1px solid rgba(255,255,255,0.09)',
                   fontFamily: 'Inter, sans-serif',
                 }}>
-                {filteredTasks.length} {filteredTasks.length === 1 ? 'task' : 'tasks'}
+                {pagination.total} {pagination.total === 1 ? 'task' : 'tasks'}
               </span>
             </div>
 
@@ -156,7 +159,14 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <TasksTable tasks={filteredTasks} onEdit={setEditTask} onRefresh={loadTasks} />
+          <TasksTable
+            tasks={tasks}
+            onEdit={setEditTask}
+            onRefresh={() => loadTasks(currentPage)}
+            pagination={pagination}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+          />
         </div>
       </main>
 

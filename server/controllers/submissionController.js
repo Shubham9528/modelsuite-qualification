@@ -1,4 +1,4 @@
-﻿const Submission = require('../models/Submission');
+const Submission = require('../models/Submission');
 const Task = require('../models/Task');
 
 // @desc  Submit a task with a file upload
@@ -66,12 +66,33 @@ const getSubmission = async (req, res) => {
 // @access Admin
 const getAllSubmissions = async (req, res) => {
   try {
-    const submissions = await Submission.find({})
-      .populate('taskId', 'title dueDate status')
-      .populate('talentId', 'name email')
-      .sort({ createdAt: -1 });
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(req.query.limit) || 10));
+    const skip = (page - 1) * limit;
 
-    res.json(submissions);
+    const [submissions, total, pending, approved, rejected] = await Promise.all([
+      Submission.find({})
+        .populate('taskId', 'title dueDate status')
+        .populate('talentId', 'name email')
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit),
+      Submission.countDocuments({}),
+      Submission.countDocuments({ reviewStatus: 'Pending' }),
+      Submission.countDocuments({ reviewStatus: 'Approved' }),
+      Submission.countDocuments({ reviewStatus: 'Rejected' })
+    ]);
+
+    res.json({
+      submissions,
+      stats: { pending, approved, rejected },
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit)
+      }
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -96,8 +117,11 @@ const reviewSubmission = async (req, res) => {
     if (!submission) {
       return res.status(404).json({ message: 'Submission not found' });
     }
-    // — task stays 'Submitted' even after the submission is Approved/Rejected
-    // Proper flow: also update Task.status to 'Approved'/'Rejected'
+
+    // Sync Task status with the review decision
+    if (reviewStatus === 'Approved' || reviewStatus === 'Rejected') {
+      await Task.findByIdAndUpdate(submission.taskId, { status: reviewStatus });
+    }
 
     res.json(submission);
   } catch (error) {

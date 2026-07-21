@@ -41,7 +41,7 @@ const STATUS_CLASS = {
   Rejected:  'status-badge-Rejected',
 };
 
-const TasksTable = ({ tasks, onEdit, onRefresh }) => {
+const TasksTable = ({ tasks, onEdit, onRefresh, pagination, currentPage, onPageChange }) => {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this task? This action cannot be undone.')) return;
@@ -67,6 +67,7 @@ const TasksTable = ({ tasks, onEdit, onRefresh }) => {
   }
 
   return (
+    <>
     <div className="overflow-x-auto">
       <table className="w-full border-collapse" style={{ fontSize: '13.5px' }}>
         <thead>
@@ -158,6 +159,61 @@ const TasksTable = ({ tasks, onEdit, onRefresh }) => {
         </tbody>
       </table>
     </div>
+
+    {/* Pagination controls */}
+    {pagination && pagination.totalPages > 1 && (
+      <div className="flex items-center justify-between px-4 py-3 border-t border-border"
+        style={{ fontFamily: 'Inter, sans-serif' }}>
+
+        {/* Left: count info */}
+        <span style={{ fontSize: '12px', color: '#4B5563' }}>
+          Page {currentPage} of {pagination.totalPages} &nbsp;·&nbsp; {pagination.total} total
+        </span>
+
+        {/* Right: page buttons */}
+        <div className="flex items-center gap-1">
+          {/* Prev */}
+          <button
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            style={{
+              padding: '4px 10px', fontSize: '12px', borderRadius: '6px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+              color: currentPage === 1 ? '#374151' : '#9CA3AF',
+            }}>
+            ← Prev
+          </button>
+
+          {/* Page numbers */}
+          {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
+            <button key={p}
+              onClick={() => onPageChange(p)}
+              style={{
+                padding: '4px 10px', fontSize: '12px', borderRadius: '6px', cursor: 'pointer',
+                background: p === currentPage ? '#3B82F6' : 'rgba(255,255,255,0.04)',
+                border: '1px solid', borderColor: p === currentPage ? '#3B82F6' : 'rgba(255,255,255,0.08)',
+                color: p === currentPage ? '#fff' : '#9CA3AF',
+                fontWeight: p === currentPage ? '600' : '400',
+              }}>
+              {p}
+            </button>
+          ))}
+
+          {/* Next */}
+          <button
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage === pagination.totalPages}
+            style={{
+              padding: '4px 10px', fontSize: '12px', borderRadius: '6px', cursor: currentPage === pagination.totalPages ? 'not-allowed' : 'pointer',
+              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
+              color: currentPage === pagination.totalPages ? '#374151' : '#9CA3AF',
+            }}>
+            Next →
+          </button>
+        </div>
+      </div>
+    )}
+    </>
   );
 };
 
