@@ -2,22 +2,106 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────
+   Theme Variables — Dark (default, preserves existing design)
+───────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg-dark:            #050505;
+  --bg-surface:         #0D0D0D;
+  --bg-card:            #0D0D0D;
+  --bg-input:           rgba(255, 255, 255, 0.05);
+  --bg-hover:           rgba(255, 255, 255, 0.04);
+  --border-col:         rgba(255, 255, 255, 0.07);
+  --border-col-light:   rgba(255, 255, 255, 0.15);
+  --text-primary:       #F0F0F0;
+  --text-muted:         #6B7280;
+  --text-faint:         rgba(255, 255, 255, 0.35);
+  --card-shadow:        none;
+  --sidebar-bg:         var(--panel-bg);
+  --sidebar-divider:    rgba(255, 255, 255, 0.06);
+  --table-header-bg:    #0A0A0A;
+  --table-row-hover:    rgba(255, 255, 255, 0.025);
+  --table-border:       rgba(255, 255, 255, 0.04);
+  --table-bar-border:   rgba(255, 255, 255, 0.06);
+  --search-bg:          rgba(255, 255, 255, 0.04);
+  --search-border:      rgba(255, 255, 255, 0.09);
+  --search-text:        #E5E2E1;
+  --task-card-bg:       rgba(255, 255, 255, 0.02);
+  --task-card-border:   rgba(255, 255, 255, 0.07);
+  --task-card-hov-bg:   rgba(255, 255, 255, 0.035);
+  --task-card-hov-bdr:  rgba(255, 255, 255, 0.13);
+  --stat-card-bg:       rgba(255, 255, 255, 0.02);
+  --stat-card-border:   rgba(255, 255, 255, 0.07);
+  --stat-card-hov-bdr:  rgba(255, 255, 255, 0.14);
+  --tasks-cont-bg:      rgba(255, 255, 255, 0.015);
+  --tasks-cont-border:  rgba(255, 255, 255, 0.07);
+  --scrollbar-thumb:    rgba(255, 255, 255, 0.08);
+  --scrollbar-hover:    rgba(255, 255, 255, 0.14);
+  --gradient-text:      linear-gradient(135deg, #ffffff 30%, #6B7280 100%);
+  --panel-bg:           linear-gradient(140deg, #050505 0%, #111111 50%, #000000 100%);
+  --logout-hover-bg:    rgba(239, 68, 68, 0.1);
+  --nav-hover-bg:       rgba(255, 255, 255, 0.05);
+  --nav-hover-color:    #E5E2E1;
+}
+
+/* ─────────────────────────────────────────
+   Theme Variables — Light (new premium slate)
+───────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-dark:            #F1F5F9;
+  --bg-surface:         #FFFFFF;
+  --bg-card:            #FFFFFF;
+  --bg-input:           rgba(15, 23, 42, 0.04);
+  --bg-hover:           rgba(15, 23, 42, 0.03);
+  --border-col:         rgba(15, 23, 42, 0.08);
+  --border-col-light:   rgba(15, 23, 42, 0.2);
+  --text-primary:       #0F172A;
+  --text-muted:         #64748B;
+  --text-faint:         rgba(15, 23, 42, 0.4);
+  --card-shadow:        0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --sidebar-bg:         var(--panel-bg);
+  --sidebar-divider:    rgba(255, 255, 255, 0.08);
+  --table-header-bg:    #F8FAFC;
+  --table-row-hover:    rgba(15, 23, 42, 0.03);
+  --table-border:       rgba(15, 23, 42, 0.06);
+  --table-bar-border:   rgba(15, 23, 42, 0.08);
+  --search-bg:          rgba(15, 23, 42, 0.04);
+  --search-border:      rgba(15, 23, 42, 0.1);
+  --search-text:        #0F172A;
+  --task-card-bg:       #FFFFFF;
+  --task-card-border:   rgba(15, 23, 42, 0.08);
+  --task-card-hov-bg:   #F8FAFC;
+  --task-card-hov-bdr:  rgba(15, 23, 42, 0.15);
+  --stat-card-bg:       #FFFFFF;
+  --stat-card-border:   rgba(15, 23, 42, 0.08);
+  --stat-card-hov-bdr:  rgba(15, 23, 42, 0.18);
+  --tasks-cont-bg:      #FFFFFF;
+  --tasks-cont-border:  rgba(15, 23, 42, 0.08);
+  --scrollbar-thumb:    rgba(15, 23, 42, 0.1);
+  --scrollbar-hover:    rgba(15, 23, 42, 0.18);
+  --gradient-text:      linear-gradient(135deg, #0F172A 30%, #64748B 100%);
+  --panel-bg:           linear-gradient(140deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+  --logout-hover-bg:    rgba(239, 68, 68, 0.08);
+  --nav-hover-bg:       rgba(255, 255, 255, 0.08);
+  --nav-hover-color:    #F1F5F9;
+}
+
+/* ─────────────────────────────────────────
    Tailwind v4 Theme — ModelSuite Talents Design System V2
 ───────────────────────────────────────── */
 @theme inline {
   --color-primary:       #3B82F6;
   --color-primary-dark:  #2563EB;
   --color-secondary:     #6B7280;
-  --color-bg-dark:       #050505;
-  --color-bg-surface:    #0D0D0D;
-  --color-bg-card:       #0D0D0D;
-  --color-bg-input:      rgba(255, 255, 255, 0.05);
-  --color-bg-hover:      rgba(255, 255, 255, 0.04);
-  --color-border:        rgba(255, 255, 255, 0.07);
-  --color-border-light:  rgba(255, 255, 255, 0.15);
-  --color-text-primary:  #F0F0F0;
-  --color-text-muted:    #6B7280;
-  --color-text-faint:    rgba(255, 255, 255, 0.35);
+  --color-bg-dark:       var(--bg-dark);
+  --color-bg-surface:    var(--bg-surface);
+  --color-bg-card:       var(--bg-card);
+  --color-bg-input:      var(--bg-input);
+  --color-bg-hover:      var(--bg-hover);
+  --color-border:        var(--border-col);
+  --color-border-light:  var(--border-col-light);
+  --color-text-primary:  var(--text-primary);
+  --color-text-muted:    var(--text-muted);
+  --color-text-faint:    var(--text-faint);
   --color-success:       #10B981;
   --color-danger:        #EF4444;
   --color-warning:       #F59E0B;
@@ -39,12 +123,13 @@
 
 body {
   font-family: 'Inter', 'Poppins', sans-serif;
-  background: #050505;
-  color: #F0F0F0;
+  background: var(--bg-dark);
+  color: var(--text-primary);
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* ─────────────────────────────────────────
@@ -52,8 +137,8 @@ body {
 ───────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.14); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-hover); }
 
 /* ─────────────────────────────────────────
    Keyframe Animations
@@ -189,8 +274,8 @@ body {
   will-change: transform, background;
 }
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #E5E2E1;
+  background: var(--nav-hover-bg);
+  color: var(--nav-hover-color);
   transform: translateX(2px);
 }
 .nav-item:hover .nav-icon {
@@ -230,19 +315,20 @@ body {
    Stat Cards
 ───────────────────────────────────────── */
 .stat-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--stat-card-bg);
+  border: 1px solid var(--stat-card-border);
   border-radius: 12px;
   padding: 20px 22px;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.15s ease-out, transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.2s ease-out, transform 0.15s ease-out, box-shadow 0.15s ease-out;
   will-change: transform, box-shadow;
 }
 .stat-card:hover {
-  border-color: rgba(255, 255, 255, 0.14);
+  border-color: var(--stat-card-hov-bdr);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 .stat-card::after {
   content: '';
@@ -266,10 +352,12 @@ body {
    Table — Modern
 ───────────────────────────────────────── */
 .tasks-container {
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--tasks-cont-bg);
+  border: 1px solid var(--tasks-cont-border);
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .table-header-bar {
@@ -277,7 +365,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid var(--table-bar-border);
   gap: 12px;
   flex-wrap: wrap;
 }
@@ -289,16 +377,18 @@ body {
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #4B5563;
-  background: #0A0A0A;
+  color: var(--text-muted);
+  background: var(--table-header-bg);
   white-space: nowrap;
   font-family: 'Inter', sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .table-td {
   padding: 14px 18px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--table-border);
   vertical-align: middle;
+  transition: border-color 0.3s ease;
 }
 
 .table-row {
@@ -307,7 +397,7 @@ body {
   transition: background 0.12s ease-out, border-color 0.12s ease-out;
 }
 .table-row:hover {
-  background: rgba(255, 255, 255, 0.025);
+  background: var(--table-row-hover);
   border-left-color: rgba(59, 130, 246, 0.5);
 }
 .table-row:last-child .table-td {
@@ -316,17 +406,17 @@ body {
 
 /* Search input glass */
 .search-input-glass {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.09);
+  background: var(--search-bg);
+  border: 1px solid var(--search-border);
   border-radius: 8px;
-  color: #E5E2E1;
+  color: var(--search-text);
   font-size: 13px;
   font-family: 'Inter', sans-serif;
   padding: 7px 12px 7px 32px;
-  transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+  transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out, background 0.3s ease;
   outline: none;
 }
-.search-input-glass::placeholder { color: rgba(255,255,255,0.25); }
+.search-input-glass::placeholder { color: var(--text-faint); }
 .search-input-glass:focus {
   border-color: rgba(59,130,246,0.5);
   box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
@@ -340,6 +430,13 @@ body {
 .status-badge-Submitted { background: rgba(59,130,246,0.12);   color: #60A5FA; border: 1px solid rgba(59,130,246,0.3); }
 .status-badge-Approved  { background: rgba(16,185,129,0.12);   color: #34D399; border: 1px solid rgba(16,185,129,0.3); }
 .status-badge-Rejected  { background: rgba(239,68,68,0.12);    color: #F87171; border: 1px solid rgba(239,68,68,0.3); }
+
+/* Light mode overrides for status-badge-Open (needs darker text on light bg) */
+[data-theme="light"] .status-badge-Open {
+  background: rgba(15,23,42,0.06);
+  color: #475569;
+  border: 1px solid rgba(15,23,42,0.12);
+}
 
 /* ─────────────────────────────────────────
    Action Icon Buttons
@@ -382,20 +479,21 @@ body {
    My Tasks Card List
 ───────────────────────────────────────── */
 .task-card {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.07);
+  background: var(--task-card-bg);
+  border: 1px solid var(--task-card-border);
   border-radius: 10px;
   padding: 14px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  transition: border-color 0.15s ease-out, background 0.15s ease-out, transform 0.15s ease-out;
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.15s ease-out, background 0.15s ease-out, transform 0.15s ease-out, box-shadow 0.15s ease-out;
   will-change: transform;
 }
 .task-card:hover {
-  border-color: rgba(255,255,255,0.13);
-  background: rgba(255,255,255,0.035);
+  border-color: var(--task-card-hov-bdr);
+  background: var(--task-card-hov-bg);
   transform: translateY(-1px);
 }
 
@@ -403,7 +501,7 @@ body {
    Gradient text
 ───────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 30%, #6B7280 100%);
+  background: var(--gradient-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -414,7 +512,7 @@ body {
 ───────────────────────────────────────── */
 .sidebar-divider {
   height: 1px;
-  background: rgba(255,255,255,0.06);
+  background: var(--sidebar-divider);
   margin: 0 -4px;
 }
 
@@ -475,5 +573,25 @@ input, select, textarea {
 }
 .logout-btn:hover {
   color: #EF4444;
-  background: rgba(239,68,68,0.1);
+  background: var(--logout-hover-bg);
+}
+
+/* ─────────────────────────────────────────
+   Dark Panel Override
+   Forces light text regardless of theme — 
+   used on right panels that are always dark
+───────────────────────────────────────── */
+.dark-panel {
+  --text-primary:  #F0F0F0;
+  --text-muted:    rgba(255, 255, 255, 0.55);
+  --text-faint:    rgba(255, 255, 255, 0.3);
+  --gradient-text: linear-gradient(135deg, #ffffff 30%, #6B7280 100%);
+  color: #F0F0F0;
+}
+
+/* ─────────────────────────────────────────
+   Logo Theme Handling
+───────────────────────────────────────── */
+[data-theme="light"] .theme-logo {
+  filter: invert(1) brightness(0.2);
 }

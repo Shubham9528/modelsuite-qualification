@@ -42,9 +42,9 @@ const MyTasksList = ({ tasks, onRefresh }) => {
     return (
       <div className="py-12 px-6 text-center rounded-xl"
         style={{
-          background: 'rgba(255,255,255,0.015)',
-          border: '1px dashed rgba(255,255,255,0.1)',
-          color: 'rgba(255,255,255,0.3)',
+          background: 'var(--task-card-bg)',
+          border: '1px dashed var(--task-card-border)',
+          color: 'var(--text-faint)',
           fontSize: '13px',
           fontFamily: 'Inter, sans-serif',
         }}>

@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import ThemeToggle from '../common/ThemeToggle';
 
 /* ── Clean SVG line-art icons (no emojis, no AI icons) ── */
 const IconDashboard = () => (
@@ -53,7 +54,7 @@ const Sidebar = () => {
 
   return (
     <aside className="fixed inset-y-0 left-0 w-[240px] flex flex-col z-50"
-      style={{ background: '#0D0D0D' }}>
+      style={{ background: 'var(--sidebar-bg)' }}>
 
       {/* Brand */}
       <div className="flex items-center justify-center px-5 py-6">
@@ -99,12 +100,15 @@ const Sidebar = () => {
             </div>
           </div>
 
-          <button
-            onClick={() => { logout(); navigate('/login'); }}
-            title="Sign out"
-            className="logout-btn">
-            <IconLogout />
-          </button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={() => { logout(); navigate('/login'); }}
+              title="Sign out"
+              className="logout-btn">
+              <IconLogout />
+            </button>
+          </div>
         </div>
       </div>
     </aside>

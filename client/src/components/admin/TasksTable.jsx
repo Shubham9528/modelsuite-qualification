@@ -55,7 +55,7 @@ const TasksTable = ({ tasks, onEdit, onRefresh, pagination, currentPage, onPageC
 
   if (tasks.length === 0) {
     return (
-      <div className="py-20 text-center" style={{ color: 'rgba(255,255,255,0.3)', fontSize: '14px' }}>
+      <div className="py-20 text-center" style={{ color: 'var(--text-faint)', fontSize: '14px' }}>
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2"
           style={{ margin: '0 auto 12px', opacity: 0.3 }} strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="3"/>
@@ -89,11 +89,11 @@ const TasksTable = ({ tasks, onEdit, onRefresh, pagination, currentPage, onPageC
               {/* Title + description */}
               <td className="table-td" style={{ maxWidth: '260px' }}>
                 <span className="block font-semibold truncate"
-                  style={{ color: '#E5E2E1', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>
+                  style={{ color: 'var(--text-primary)', fontFamily: 'Inter, sans-serif', marginBottom: '2px' }}>
                   {task.title || '—'}
                 </span>
                 {task.description && (
-                  <span className="block truncate" style={{ color: '#4B5563', fontSize: '12px', maxWidth: '240px' }}>
+                  <span className="block truncate" style={{ color: 'var(--text-muted)', fontSize: '12px', maxWidth: '240px' }}>
                     {task.description}
                   </span>
                 )}
@@ -120,20 +120,20 @@ const TasksTable = ({ tasks, onEdit, onRefresh, pagination, currentPage, onPageC
                       }}>
                       {task.assignedTo.name?.[0]?.toUpperCase()}
                     </div>
-                    <span style={{ color: '#E5E2E1' }}>{task.assignedTo.name}</span>
+                    <span style={{ color: 'var(--text-primary)' }}>{task.assignedTo.name}</span>
                   </div>
                 ) : (
-                  <span style={{ color: '#4B5563', fontSize: '13px' }}>Unassigned</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '13px' }}>Unassigned</span>
                 )}
               </td>
 
               {/* Due date */}
-              <td className="table-td" style={{ color: '#6B7280', whiteSpace: 'nowrap' }}>
+              <td className="table-td" style={{ color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
                 {fmtDate(task.dueDate)}
               </td>
 
               {/* Created */}
-              <td className="table-td" style={{ color: '#4B5563', whiteSpace: 'nowrap', fontSize: '12.5px' }}>
+              <td className="table-td" style={{ color: 'var(--text-muted)', whiteSpace: 'nowrap', fontSize: '12.5px' }}>
                 {fmtDate(task.createdAt)}
               </td>
 
@@ -166,7 +166,7 @@ const TasksTable = ({ tasks, onEdit, onRefresh, pagination, currentPage, onPageC
         style={{ fontFamily: 'Inter, sans-serif' }}>
 
         {/* Left: count info */}
-        <span style={{ fontSize: '12px', color: '#4B5563' }}>
+        <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
           Page {currentPage} of {pagination.totalPages} &nbsp;·&nbsp; {pagination.total} total
         </span>
 
@@ -178,8 +178,8 @@ const TasksTable = ({ tasks, onEdit, onRefresh, pagination, currentPage, onPageC
             disabled={currentPage === 1}
             style={{
               padding: '4px 10px', fontSize: '12px', borderRadius: '6px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-              color: currentPage === 1 ? '#374151' : '#9CA3AF',
+              background: 'var(--bg-input)', border: '1px solid var(--border-col)',
+              color: currentPage === 1 ? 'var(--text-faint)' : 'var(--text-muted)',
             }}>
             ← Prev
           </button>
@@ -190,9 +190,9 @@ const TasksTable = ({ tasks, onEdit, onRefresh, pagination, currentPage, onPageC
               onClick={() => onPageChange(p)}
               style={{
                 padding: '4px 10px', fontSize: '12px', borderRadius: '6px', cursor: 'pointer',
-                background: p === currentPage ? '#3B82F6' : 'rgba(255,255,255,0.04)',
-                border: '1px solid', borderColor: p === currentPage ? '#3B82F6' : 'rgba(255,255,255,0.08)',
-                color: p === currentPage ? '#fff' : '#9CA3AF',
+                background: p === currentPage ? '#3B82F6' : 'var(--bg-input)',
+                border: '1px solid', borderColor: p === currentPage ? '#3B82F6' : 'var(--border-col)',
+                color: p === currentPage ? '#fff' : 'var(--text-muted)',
                 fontWeight: p === currentPage ? '600' : '400',
               }}>
               {p}
@@ -205,8 +205,8 @@ const TasksTable = ({ tasks, onEdit, onRefresh, pagination, currentPage, onPageC
             disabled={currentPage === pagination.totalPages}
             style={{
               padding: '4px 10px', fontSize: '12px', borderRadius: '6px', cursor: currentPage === pagination.totalPages ? 'not-allowed' : 'pointer',
-              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)',
-              color: currentPage === pagination.totalPages ? '#374151' : '#9CA3AF',
+              background: 'var(--bg-input)', border: '1px solid var(--border-col)',
+              color: currentPage === pagination.totalPages ? 'var(--text-faint)' : 'var(--text-muted)',
             }}>
             Next →
           </button>
