@@ -1,4 +1,4 @@
-﻿import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -41,6 +41,14 @@ function App() {
           />
           <Route
             path="/talent/dashboard"
+            element={
+              <PrivateRoute role="Talent">
+                <TalentDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/talent/tasks"
             element={
               <PrivateRoute role="Talent">
                 <TalentDashboard />
