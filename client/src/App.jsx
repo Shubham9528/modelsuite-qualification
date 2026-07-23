@@ -50,6 +50,14 @@ function App() {
             }
           />
           <Route
+            path="/talent/tasks"
+            element={
+              <PrivateRoute role="Talent">
+                <TalentDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
             path="/admin/submissions"
             element={
               <PrivateRoute role="Admin">

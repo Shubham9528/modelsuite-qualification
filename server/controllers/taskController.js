@@ -1,5 +1,6 @@
 const Task = require('../models/Task');
 const Submission = require('../models/Submission');
+const mongoose = require('mongoose');
 
 // @desc  Get all tasks (paginated)
 // @route GET /api/tasks?page=1&limit=10
@@ -57,12 +58,25 @@ const getAllTasks = async (req, res) => {
 // @access Admin
 const getTaskById = async (req, res) => {
   try {
-    // — will throw a CastError from Mongoose instead of a clean 400
+    // Validate ID format first to prevent CastError from Mongoose
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: 'Invalid task ID' });
+    }
+
     const task = await Task.findById(req.params.id)
       .populate('assignedTo', 'name email')
       .populate('createdBy', 'name');
 
     if (!task) return res.status(404).json({ message: 'Task not found' });
+
+    // Authorization: Talents can only view tasks that are globally Open or assigned to them
+    if (req.user && req.user.role === 'Talent') {
+      const isAssigned = task.assignedTo && task.assignedTo._id.toString() === req.user._id.toString();
+      const isOpen = task.status === 'Open';
+      if (!isOpen && !isAssigned) {
+        return res.status(403).json({ message: 'Access denied: You are not authorized to view this task' });
+      }
+    }
 
     res.json(task);
   } catch (error) {
