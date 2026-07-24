@@ -92,8 +92,8 @@ const Sidebar = () => {
               {user?.name?.[0]?.toUpperCase() ?? 'A'}
             </div>
             <div className="min-w-0">
-              <p className="text-[13px] font-semibold truncate max-w-[110px]"
-                style={{ color: '#E5E2E1', fontFamily: 'Inter, sans-serif' }}>
+              <p className="text-[13px] font-semibold truncate max-w-[100px] text-text-primary"
+                style={{ fontFamily: 'Inter, sans-serif' }}>
                 {user?.name}
               </p>
               <p className="text-[11px]" style={{ color: '#4B5563' }}>Admin</p>

@@ -68,8 +68,8 @@ const MyTasksList = ({ tasks, onRefresh }) => {
 
             {/* Task info */}
             <div className="flex-1 min-w-0">
-              <p className="font-semibold truncate mb-0.5"
-                style={{ fontSize: '13.5px', color: '#E5E2E1', fontFamily: 'Inter, sans-serif' }}>
+              <p className="font-semibold truncate mb-0.5 text-text-primary"
+                style={{ fontSize: '13.5px', fontFamily: 'Inter, sans-serif' }}>
                 {task.title || 'Untitled Task'}
               </p>
               {fmtDate(task.dueDate) && (
