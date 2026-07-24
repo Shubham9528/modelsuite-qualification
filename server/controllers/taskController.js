@@ -58,12 +58,14 @@ const getAllTasks = async (req, res) => {
 // @access Admin
 const getTaskById = async (req, res) => {
   try {
+    const taskId = (req.params.id || '').trim();
+
     // Validate ID format first to prevent CastError from Mongoose
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    if (!mongoose.Types.ObjectId.isValid(taskId)) {
       return res.status(400).json({ message: 'Invalid task ID' });
     }
 
-    const task = await Task.findById(req.params.id)
+    const task = await Task.findById(taskId)
       .populate('assignedTo', 'name email')
       .populate('createdBy', 'name');
 
